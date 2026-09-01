@@ -1,5 +1,6 @@
 import random
 from itertools import combinations
+import os
 
 def __all_team_in_selection(selections, team):
     """
@@ -155,7 +156,10 @@ if __name__ == "__main__":
                 longterm_pairs.update(shortterm_pairs)
 
     # write the file output
-    fileout = f'./outputs/{start.strftime('%Y%m%d')}-{end_date.strftime('%Y%m%d')}-random-coffee-schedule.txt'
+    if not os.path.exists('./outputs/'):
+        os.makedirs('./outputs/')
+
+    fileout = f'./outputs/{start.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}-random-coffee-schedule.txt'
     with open(fileout, 'w') as fout:
         for date in longterm_pairs.keys():
             fout.write(f"Coffee dates for week of {date.strftime('%m/%d/%Y')}:\n")
